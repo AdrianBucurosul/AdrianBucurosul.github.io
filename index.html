@@ -83,7 +83,31 @@
             font-weight: bold;
             font-family: 'Arial', sans-serif;
         }
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #005fa3;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+        }
+        #back-to-top:hover {
+            background-color: #0077cc;
+        }
+        #map {
+            height: 400px;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
     </style>
+    <!-- Include Leaflet.js -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
 
@@ -92,7 +116,7 @@
     </header>
 
     <nav>
-        <a href="#despre">Ce este Scuba Diving-ul?</a>
+        <a href="#despre">Ce este Scuba Divingul?</a>
         <a href="#echipament">Echipament</a>
         <a href="#beneficii">Beneficii</a>
         <a href="#cursuri">Cum să începi?</a>
@@ -101,15 +125,15 @@
 
     <main>
         <section id="despre">
-            <h2>Ce este Scuba Diving-ul?</h2>
+            <h2>Ce este Scuba Divingul?</h2>
             <p>
                 Cuvântul „SCUBA” provine de la abrevierea în limba engleză a expresiei Self-Contained Underwater Breathing Apparatus, adică „aparat autonom de respirat sub apă”.
             </p>
             <p>
-                Scuba diving-ul este o activitate de explorare subacvatică, aventură, relaxare și descoperire în care o persoană folosește un echipament special pentru a respira sub apă.
+                Scuba divingul este o activitate de explorare subacvatică, aventură, relaxare și descoperire în care o persoană folosește un echipament special pentru a respira sub apă.
             </p>
             <p>
-                Pe scurt, scuba diving-ul înseamnă să te scufunzi sub apă cu un rezervor de aer comprimat în spate, purtând o mască, labe de înot și un costum de protecție, pentru a explora lumea subacvatică. Această activitate poate fi practicată atât ca hobby, cât și în scopuri profesionale sau științifice, fie că este vorba despre recife de corali, epave, peșteri subacvatice sau faună marină diversă.
+                Pe scurt, scuba divingul înseamnă să te scufunzi sub apă cu un rezervor de aer comprimat în spate, purtând o mască, labe de înot și un costum de protecție, pentru a explora lumea subacvatică. Această activitate poate fi practicată atât ca hobby, cât și în scopuri profesionale sau științifice, fie că este vorba despre recife de corali, epave, peșteri subacvatice sau faună marină diversă.
 
             </p>
              <img src="img\scafandru.JPG" alt="Scafandru explorând reciful" class="responsive">
@@ -117,7 +141,7 @@
 
         <section id="echipament">
             <h2>Echipamentul Esențial</h2>
-            <p>Pentru a practica scuba diving-ul în siguranță și confort, ai nevoie de echipament specializat:</p>
+            <p>Pentru a practica scuba divingul în siguranță și confort, ai nevoie de echipament specializat:</p>
             <ul>
                 <li><span class="highlight">Mască:</span> Permite vizibilitate clară sub apă și acoperă nasul.</li>
                 <li><span class="highlight">Tub de respirat (Snorkel):</span> Util pentru respirația la suprafață fără a consuma aer din butelie.</li>
@@ -133,8 +157,8 @@
         </section>
 
         <section id="beneficii">
-            <h2>Beneficiile Scuba Diving-ului</h2>
-            <p>Pe lângă aventura explorării subacvatice, scuba diving-ul oferă numeroase beneficii:</p>
+            <h2>Beneficiile Scuba Divingului</h2>
+            <p>Pe lângă aventura explorării subacvatice, scuba divingul oferă numeroase beneficii:</p>
             <ul>
                 <li>Îți oferă o perspectivă complet nouă asupra lumii subacvatice și creșterea conștientizării față de mediul marin.</li>                
                 <li>Relaxare și reducerea stresului prin respirație controlată și imersiunea într-un mediu liniștit.</li>
@@ -150,6 +174,7 @@
             <p>Dacă nu ai mai încercat scufundările până acum, programul Discover Scuba Diving este o alegere excelentă! Alături de un instructor, dintr-un centru de scufundări certificat, vei putea face prima ta scufundare în siguranță, fără să fie nevoie de experiență anterioară sau certificare, iar dacă îți place și vrei să mergi mai departe, va fi nevoie să urmezi un curs complet și să obții o certificare recunoscută internațional sub licenta PADI, SSI, NAUI sau CMAS.   
             <p>Pentru începători, prima categorie de curs, este Open Water Diver - te învață toate bazele: teoria, exercițiile practice în piscină sau ape puțin adânci, și scufundări în ape deschise întotdeauna sub supravegherea unui instructor calificat.
             <p>Caută un centru de scufundări autorizat în zona ta sau în destinația dorită pentru a te înscrie la un curs. După certificarea inițială, poți avansa prin cursuri specializate (Advanced Open Water, Rescue Diver, Divemaster etc.) pentru a-ți extinde cunoștințele și abilitățile în scufundări.
+            
             </p>
         </section>
 
@@ -165,8 +190,16 @@
                 <li>Caraibe (Bonaire, Cozumel)</li>
                 <li>Galapagos</li>
                 <li>Mediterana (Malta, Cipru)</li>
+                <li>Insulele Fiji</li>
+                <li>Hawaii (SUA)</li>
+                <li>Bali (Indonezia)</li>
+                <li>Palau</li>
+                <li>Belize</li>
+                <li>Insulele Seychelles</li>
+                <li>Insulele Azore (Portugalia)</li>
                 
             </ul>
+            <div id="map"></div>
         </section>
     </main>
 
@@ -176,6 +209,68 @@
         <p>Gmail: <a href="mailto:adrian.crintea23@gmail.com">adrian.crintea23@gmail.com</a></p>
         <p>Telefon: <a href="tel:+40762607081ss="fas fa-phone></i> +40762607081</a></p>
     </footer>
+
+    <button id="back-to-top">↑ Înapoi sus</button>
+
+    <script>
+        const backToTop = document.getElementById("back-to-top");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 200) {
+                backToTop.style.display = "block";
+            } else {
+                backToTop.style.display = "none";
+            }
+        });
+        backToTop.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // Inițializează harta
+        const map = L.map('map', {
+            zoomControl: false, // Dezactivează controlul de zoom
+            dragging: false, // Dezactivează tragerea hărții
+            scrollWheelZoom: false, // Dezactivează zoom-ul cu scroll-ul mouse-ului
+            doubleClickZoom: false, // Dezactivează zoom-ul cu dublu click
+            boxZoom: false, // Dezactivează zoom-ul cu casetă
+            touchZoom: false, // Dezactivează zoom-ul pe dispozitive tactile
+            maxBounds: [
+                [-90, -180], // Limita sud-vest
+                [90, 180]    // Limita nord-est
+            ],
+            maxBoundsViscosity: 1.0 // Previne scroll-ul în afara limitelor
+        }).setView([20.0, 10.0], 2); // Centru global, zoom fix
+
+        // Adaugă un layer de hărți (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Set de date cu locații populare pentru scufundări
+        const diveSites = [
+            { name: "Marea Neagră (România)", coords: [44.1748, 28.6383], description: "Epave istorice în zona Constanța." },
+            { name: "Marea Roșie (Egipt)", coords: [27.2579, 33.8116], description: "Recife spectaculoase și biodiversitate." },
+            { name: "Marea Barieră de Corali (Australia)", coords: [-18.2871, 147.6992], description: "Cel mai mare sistem de recife din lume." },
+            { name: "Maldive", coords: [3.2028, 73.2207], description: "Ape cristaline și recife de corali." },
+            { name: "Tailanda", coords: [7.9519, 98.3381], description: "Locații populare precum Koh Tao și Similan Islands." },
+            { name: "Caraibe (Bonaire)", coords: [12.1784, -68.2385], description: "Scufundări la recife și epave." },
+            { name: "Galapagos", coords: [-0.9538, -90.9656], description: "Faună marină unică, inclusiv rechini ciocan." },
+            { name: "Mediterana (Malta)", coords: [35.8997, 14.5146], description: "Epave și peșteri subacvatice." },
+            { name: "Insulele Fiji", coords: [-17.7134, 178.065], description: "Recife moi și biodiversitate." },
+            { name: "Hawaii (SUA)", coords: [20.7967, -156.3319], description: "Scufundări cu manta și recife vulcanice." },
+            { name: "Bali (Indonezia)", coords: [-8.4095, 115.1889], description: "Epave și biodiversitate." },
+            { name: "Palau", coords: [7.515, 134.5825], description: "Recife spectaculoase și lacuri cu meduze." },
+            { name: "Belize", coords: [17.1899, -88.4976], description: "Blue Hole și recife de corali." },
+            { name: "Insulele Seychelles", coords: [-4.6796, 55.492], description: "Recife de granit și biodiversitate." },
+            { name: "Insulele Azore (Portugalia)", coords: [37.7412, -25.6756], description: "Scufundări cu rechini și peșteri subacvatice." }
+        ];
+        
+        // Adaugă marcaje pentru fiecare locație
+        diveSites.forEach(site => {
+            L.marker(site.coords)
+                .addTo(map)
+                .bindPopup(`<b>${site.name}</b><br>${site.description}`);
+        });
+    </script>
 
 </body>
 </html>
